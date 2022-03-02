@@ -21,7 +21,7 @@ namespace WPF_ZooManager
                 .ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
             ShowZoos();
-            ShowAnimals();
+            ShowAllAnimals();
         }
         private void ShowZoos()
         {
@@ -49,7 +49,7 @@ namespace WPF_ZooManager
                 MessageBox.Show(e.ToString());
             }
         }
-        private void ShowAnimals()
+        private void ShowAllAnimals()
         {
             try
             {
@@ -103,6 +103,11 @@ namespace WPF_ZooManager
         {
             ShowAssociatedAnimals();
             //MessageBox.Show(listZoos.SelectedValue.ToString());
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
