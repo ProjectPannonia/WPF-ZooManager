@@ -105,6 +105,24 @@ namespace WPF_ZooManager
             //MessageBox.Show(listZoos.SelectedValue.ToString());
         }
 
+
+        private void AddAnimal(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = "insert into Animal values(@Name)";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@Name", zooTb.Text);
+                sqlCommand.ExecuteScalar();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }finally
+            {
+                sqlConnection.Close();
+            }
+        }
         private void DeleteZoo(object sender, RoutedEventArgs e)
         {
             try
