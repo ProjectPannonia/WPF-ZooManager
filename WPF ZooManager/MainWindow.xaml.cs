@@ -123,9 +123,46 @@ namespace WPF_ZooManager
                 sqlConnection.Close();
                 ShowZoos();
             }
-            
-            
-            
+        }
+
+        private void DeleteAnimal(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = "delete from Animal where id = @AnimalId";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@AnimalId", listAnimals.SelectedValue);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                ShowAllAnimals();
+            }
+        }
+
+        private void AddZoo(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = "insert into Zoo values (@Location)";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@Location", zooTb.Text);
+                sqlCommand.ExecuteScalar();
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }finally
+            {
+                sqlConnection.Close();
+                ShowZoos();
+            }
         }
     }
 }
